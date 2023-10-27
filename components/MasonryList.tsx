@@ -15,14 +15,14 @@ import {
       image: string;
       title: string;
     }[];
-    // refreshing?: boolean;
-    // onRefresh?: () => void;
+    refreshing?: boolean;
+    onRefresh?: () => void;
   }
   
   const MasonryList = ({
     pins,
-    // refreshing = false,
-    // onRefresh = () => {},
+    refreshing = false,
+    onRefresh = () => {},
   }: IMasonryList) => {
     const width = useWindowDimensions().width;
   
@@ -31,9 +31,9 @@ import {
     return (
       <ScrollView
         contentContainerStyle={{ width: "100%" }}
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <View style={styles.container}>
           {Array.from(Array(numColumns)).map((_, colIndex) => (

@@ -1,18 +1,22 @@
-import { StyleSheet, Image, ScrollView } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
+import { StyleSheet, Image, ScrollView, Pressable } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import MasonryList from '../../components/MasonryList';
 import pins from '../../assets/data/pins';
 import { Feather, Entypo } from '@expo/vector-icons';
+import { useSignOut } from '@nhost/react';
 
 export default function ProfileScreen() {
+
+  const {signOut}=useSignOut();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
 
         <View style={styles.icons}>
-          <Feather name='share' size={24} color="black" style={styles.icons} />
+          <Pressable onPress={signOut}>
+            <Feather name='share' size={24} color="black" style={styles.icons} />
+          </Pressable>
           <Entypo name='dots-three-vertical' size={24} color="black" style={styles.icons} />
         </View>
       <Image 

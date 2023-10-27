@@ -3,8 +3,11 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
-// import PinScreen from '../screens/PinScreen';
+import { useColorScheme, ActivityIndicator } from 'react-native';
+import nhost from '../helpers';
+import { NhostProvider, useAuthenticationStatus } from '@nhost/react';
+
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -25,6 +28,9 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+  
+  
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -40,19 +46,37 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <RootLayoutNav />
+  )
 }
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  // const [isLoading,isAuthenticated] = useAuthenticationStatus();
+
+  // if(isLoading) {
+  //   return <ActivityIndicator />
+  // }
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="PinScreen" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <NhostProvider nhost={nhost}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack >
+        {/* if{!isAuthenticated}{
+          
+        }else{
+          <> */}
+            <Stack.Screen name="AuthStackNavigator" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="PinScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          {/* </>
+        } */}
+      </ Stack>
+      </ThemeProvider>
+    </NhostProvider>
+    
   );
 }
