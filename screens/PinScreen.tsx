@@ -9,9 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useNhostClient } from "@nhost/react";
-import Pin from "../components/Pin";
 import RemoteImage from "../components/RemoteImage";
-// import RemoteImage from "../components/RemoteImage";
 
 const GET_PIN_QUERY = `
 query MyQuery ($id: uuid!) {
@@ -31,6 +29,7 @@ query MyQuery ($id: uuid!) {
 
 const PinScreen = () => {
   const [pin, setPin] = useState<any>(null);
+
   const nhost = useNhostClient();
 
   const navigation = useNavigation();
@@ -64,7 +63,7 @@ const PinScreen = () => {
     <SafeAreaView style={{ backgroundColor: "black" }}>
       <StatusBar style="light" />
       <View style={styles.root}>
-      <RemoteImage fileId={pin.image} />
+        <RemoteImage fileId={pin.image} />
         <Text style={styles.title}>{pin.title}</Text>
       </View>
 

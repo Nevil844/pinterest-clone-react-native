@@ -1,11 +1,9 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import Colors from '../constants/Colors';
-import { ExternalLink } from './ExternalLink';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
-
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
@@ -34,15 +32,19 @@ export default function EditScreenInfo({ path }: { path: string }) {
       </View>
 
       <View style={styles.helpContainer}>
-        <ExternalLink
-          style={styles.helpLink}
-          href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
+        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
           <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
             Tap here if your app doesn't automatically update after making changes
           </Text>
-        </ExternalLink>
+        </TouchableOpacity>
       </View>
     </View>
+  );
+}
+
+function handleHelpPress() {
+  WebBrowser.openBrowserAsync(
+    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
   );
 }
 

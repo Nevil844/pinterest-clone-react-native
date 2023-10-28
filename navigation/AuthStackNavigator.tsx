@@ -1,14 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignInScreen from "./Auth/SignInScreen";
-import SignUpScreen from "./Auth/SignUpScreen";
-import nhost from '../helpers';
-import { NhostReactProvider, useAuthenticationStatus } from '@nhost/react';
+import SignInScreen from "../screens/Auth/SignInScreen";
+import SignUpScreen from "../screens/Auth/SignUpScreen";
 
 const Stack = createNativeStackNavigator();
 
 const AuthStackNavigator = () => {
   return (
-    <NhostReactProvider nhost={nhost}>
     <Stack.Navigator>
       <Stack.Screen
         name="Sign in"
@@ -17,7 +14,6 @@ const AuthStackNavigator = () => {
       />
       <Stack.Screen name="Sign up" component={SignUpScreen} />
     </Stack.Navigator>
-    </NhostReactProvider>
   );
 };
 
