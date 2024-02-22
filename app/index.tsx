@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
 import useCachedResources from "../hooks/useCachedResources";
 import useColorScheme from "../hooks/useColorScheme";
 import Navigation from "../navigation";
@@ -9,7 +8,9 @@ import { NhostClient, NhostReactProvider } from "@nhost/react";
 import * as SecureStore from "expo-secure-store";
 
 const nhost = new NhostClient({
-  backendUrl: "https://jmdnmlfshhnrxqccrwra.nhost.run",
+  // backendUrl: "https://jmdnmlfshhnrxqccrwra.nhost.run",
+  subdomain: 'jmdnmlfshhnrxqccrwra',
+  region: 'ap-south-1',
   clientStorageType: "expo-secure-storage",
   clientStorage: SecureStore,
 });
